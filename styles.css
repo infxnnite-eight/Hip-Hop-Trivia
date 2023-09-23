@@ -5,7 +5,7 @@
 
 
 :root {
-    --hue-neutral: 2001;
+    --hue-neutral: 300  ;
     --hue-wrong: 0;
     --hue-correct: 145;
 }
@@ -45,23 +45,24 @@ body.wrong {
     background-color: rgb(255, 255, 255);
     border-radius: 5px;
     padding: 100px;
-    box-shadow: 0 0 10px 2px;
+    box-shadow: 0 0 1px 2px;
 
 }
 
 .btn-grid {
     display: grid;
-    grid-template-columns: repeat(2, auto);
+    grid-template-columns: repeat (2, auto);
     gap: 10px;
     margin: 20px 0;
 }
 
-.btn{
+.btn {
     --hue: var(--hue-neutral);
     border: 1px solid hsl(var (--hue), 100%, 30%);
     background-color: hsl(var(--hue), 100%, 50%);
     border-radius: 5px;
-    padding:  5px 10px;
+    padding:  10px 10px;
+    margin: 2px;    
     color: white;
     outline: none;
 
@@ -85,10 +86,10 @@ body.wrong {
 
 }
 
-.start-btn, .next-btn {
+.start-btn, .next-btn  {
     font-size: 1.5rem;
     font-weight: bold;
-    padding: 5px 20px;
+    padding: px 20px;
 
 }
 
@@ -96,6 +97,12 @@ body.wrong {
     display: flex;
     justify-content: center;
     align-items: center;
+    
 
 }
+
+.hide {
+    display: none ;
+}
+
 
