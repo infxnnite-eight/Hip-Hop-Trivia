@@ -31,7 +31,7 @@ function selectAnswer() {
 
 const questions = [
     {
-        question: 'Who is the King Of The South',
+        question: 'What Rapper is considered the King Of The Of South ',
         answers: [
             { text: 'Gucci Mane', correct: true },
             { text: 'Denzel Curry', correct: false },
