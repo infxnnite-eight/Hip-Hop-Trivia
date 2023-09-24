@@ -7,6 +7,10 @@ const answersButtonsElement = document.getElementById('answer-buttons');
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener('click', startGame);
+nextButton.addEventListener('click', () => {
+    currentQuestionIndex++;
+    setNextQuestion();
+});
 
 function startGame() {
     console.log('Started');
@@ -18,13 +22,20 @@ function startGame() {
 }
 
 function setNextQuestion() {
-    clearStatusClass(questionContainerElement);
-    showQuestion(shuffledQuestions[currentQuestionIndex]);
-    nextButton.classList.add('hide');
+    clearStatusClass(document.body);
+    if (currentQuestionIndex < shuffledQuestions.length) {
+        showQuestion(shuffledQuestions[currentQuestionIndex]);
+        nextButton.classList.add('hide');
+    } else {
+        // All questions have been answered
+        startButton.innerText = 'Restart';
+        startButton.classList.remove('hide');
+    }
 }
 
 function showQuestion(question) {
     questionElement.innerText = question.question;
+    answersButtonsElement.innerHTML = ''; // Clear previous answer buttons
     question.answers.forEach(answer => {
         const button = document.createElement('button');
         button.innerText = answer.text;
@@ -42,14 +53,20 @@ function selectAnswer(e) {
     const correct = selectedButton.dataset.correct;
     setStatusClass(selectedButton, correct);
     Array.from(answersButtonsElement.children).forEach(button => {
-        setStatusClass(button, button.dataset.correct);
+        button.disabled = true; // Disable buttons after selecting an answer
     });
-    nextButton.classList.remove('hide');
+
+    if (currentQuestionIndex < shuffledQuestions.length - 1) {
+        nextButton.classList.remove('hide');
+    } else {
+        startButton.innerText = 'Restart';
+        startButton.classList.remove('hide');
+    }
 }
 
 function setStatusClass(element, correct) {
     clearStatusClass(element);
-    if (correct) {
+    if (correct === 'true') {
         element.classList.add('correct');
     } else {
         element.classList.add('wrong');
@@ -63,12 +80,30 @@ function clearStatusClass(element) {
 
 const questions = [
     {
-        question: 'What Rapper is considered the King Of The Of South ',
+        question: 'What Rapper is considered the King Of The South?',
         answers: [
-            { text: 'Gucci Mane', correct: false },
-            { text: 'Denzel Curry', correct: false },
-            { text: 'Andre 3000', correct: false },
-            { text: 'T.I.', correct: true },
+            { text: 'Gucci Mane', correct: 'false' },
+            { text: 'Denzel Curry', correct: 'false' },
+            { text: 'Andre 3000', correct: 'false' },
+            { text: 'T.I.', correct: 'true' },
+        ]
+    },
+    {
+        question: 'What Independent Hip-Hop Artist Sold The Most Records',
+        answers: [
+            { text: 'Nipsey Hussle', correct: 'false' },
+            { text: 'E-40', correct: 'true' },
+            { text: 'Tech N9ne', correct: 'false' },
+            { text: 'MF Doom', correct: 'false' },
+        ]
+    },
+    {
+        question: 'Who was the first female Hip-Hop artist to win a Grammy?',
+        answers: [
+            { text: 'Cardi B', correct: 'false' },
+            { text: 'Nicki Minaj', correct: 'false' },
+            { text: 'Queen Latifah & Salt-N-Pepa', correct: 'true' },
+            { text: 'Missy Elliott', correct: 'false' },
         ]
     }
 ];
