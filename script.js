@@ -105,5 +105,14 @@ const questions = [
             { text: 'Queen Latifah & Salt-N-Pepa', correct: 'true' },
             { text: 'Missy Elliott', correct: 'false' },
         ]
+    },
+    {
+        question: 'Who Artist Duo Made The Album "Stankonia"',
+        answers: [
+            { text: 'Goodie Mob', correct: 'false' },
+            { text: 'MF Doom', correct: 'false' },
+            { text: 'OutKast', correct: 'true' },
+            { text: 'Big K.R.I.T', correct: 'false' },
+        ]
     }
 ];
