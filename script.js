@@ -3,7 +3,15 @@ const nextButton = document.getElementById('next-btn');
 const questionContainerElement = document.getElementById('question-container');
 const questionElement = document.getElementById('question');
 const answersButtonsElement = document.getElementById('answer-buttons');
+const buttonClickSound = document.getElementById('button-click-sound'); // Fix the typo in 'const'
 
+
+// ...
+
+function playButtonClickSound() {
+    buttonClickSound.currentTime = 0; // Rewind the sound to the beginning
+    buttonClickSound.play();
+}
 let shuffledQuestions, currentQuestionIndex;
 
 startButton.addEventListener('click', startGame);
@@ -43,14 +51,16 @@ function showQuestion(question) {
         if (answer.correct) {
             button.dataset.correct = answer.correct;
         }
-        button.addEventListener('click', selectAnswer);
+        button.addEventListener('click', () => {
+            selectAnswer(answer.correct);
+            playButtonClickSound(); // Play the sound when the button is clicked
+        });
         answersButtonsElement.appendChild(button);
     });
 }
 
-function selectAnswer(e) {
-    const selectedButton = e.target;
-    const correct = selectedButton.dataset.correct;
+function selectAnswer(correct) {
+    const selectedButton = event.target;
     setStatusClass(selectedButton, correct);
     Array.from(answersButtonsElement.children).forEach(button => {
         button.disabled = true; // Disable buttons after selecting an answer
@@ -116,3 +126,8 @@ const questions = [
         ]
     }
 ];
+
+function playButtonClickSound() {
+    buttonClickSound.currentTime = 0; // Rewind the sound to the beginning
+    buttonClickSound.play();
+}
